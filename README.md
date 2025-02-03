@@ -2,19 +2,17 @@
 
 ## 📖  Descrição
 
-Esse é o projeto back-end possui um modelo RESTful para gerenciamento de aluguéis. Ele armazena dados de propriedades, inquilinos, contratos e pagamentos.
+Este é um backend para gerenciar aluguéis de propriedades desenvolvido usando Django e Django REST Framework. O sistema permite o cadastro e gerenciamento de inquilinos, imóveis, contratos e pagamentos, além de funcionalidades avançadas como relatórios financeiros e envio de e-mails automáticos aos inquilinos sobre as datas de vencimento dos aluguéis.
 
 <br/>
 
 ## 🛠️ Funcionalidades
 
-- CRUD de imóveis
-- CRUD de inquilinos
-- CRUD de contratos de aluguel
-- CRUD de pagamentos
-- Relatórios de aluguéis pagos/pendentes/atrasados
-- Emails automáticos para lembrar inquilinos sobre vencimentos
-- Possui autenticação dos usuários
+- CRUD de propriedades, inquilinos, contratos e pagamentos
+- Autenticação de usuários (registro, login e logout)
+- Relatórios de aluguéis pagos/pendentes
+- Envio automático de e-mails para lembrar inquilinos sobre vencimentos
+- Testes automatizados com Pytest
 <br/>
 
 ## 📡 Tecnologias utilizadas 
