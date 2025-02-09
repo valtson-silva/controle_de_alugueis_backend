@@ -21,6 +21,7 @@ Este é um backend para gerenciar aluguéis de propriedades desenvolvido usando 
 <img align="left" alt="Django" height="30" width="45" src="https://static.djangoproject.com/img/logos/django-logo-negative.svg">
 <img align="left" alt="Postgresql" height="30" width="30" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg">
 <img align="left" alt="celery" height="32" width="35" src="https://docs.celeryq.dev/en/stable/_static/celery_512.png">
+<img align="left" alt="redis" height="38" width="47" src="https://github.com/user-attachments/assets/0f604e51-e697-4358-b3b5-7f002b52ec58">
 </div>
 <br/><br/>
 
