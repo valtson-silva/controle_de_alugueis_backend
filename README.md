@@ -27,7 +27,7 @@ Este é um backend para gerenciar aluguéis de propriedades desenvolvido usando 
 
 ## ⏳ Inicialização
 
-Esse projeto foi desenvolvido em ambiente Windows, utilizando as tecnologias citadas anteriormente. Sugiro que você prepare o seu ambiente seguindo os passos abaixo:
+Esse projeto foi desenvolvido em ambiente Linux, utilizando as tecnologias citadas anteriormente. Sugiro que você prepare o seu ambiente seguindo os passos abaixo:
 
 A preparação do ambiente consiste em instalar as tecnologias citadas anteriormente de acordo com seu sistema operacional.
 
