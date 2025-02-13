@@ -9,11 +9,11 @@ def test_tenants_list():
     client = APIClient()
     # Registra um usuário de teste
     user = User.objects.create_user(username="testuser", password="testpass")
-    # Obtém a url
+    
     url = reverse('tenants_get')
-    # Faz o login
+    
     client.login(username="testuser", password="testpass")
-    # Faz a requisição get
+    
     response = client.get(url)
     
     # Verifica se o status retornado foi 200 OK
@@ -21,15 +21,15 @@ def test_tenants_list():
     
 @pytest.mark.django_db
 def test_create_tenant():
-     # Simula um cliente HTTP
+     
     client = APIClient()
-    # Registra um usuário de teste
+    
     user = User.objects.create_user(username="testuser", password="testpass")
-    # Obtém a url
+    
     url = reverse('tenant_create')
-    # Faz o login
+    
     client.login(username="testuser", password="testpass")
-    # Faz a requisição post
+    
     response = client.post(url, {
         "name": "João da Silva",
         "contact": "99999999",
