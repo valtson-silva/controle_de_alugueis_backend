@@ -8,7 +8,7 @@ from django.urls import reverse
 def test_login_user():
     # Cria um usuário de teste
     user = User.objects.create_user(username="testuser", password="testpass")
-    # Obtém a url
+    
     url = reverse('login')
     # Simula um cliente HTTP
     client = APIClient()
