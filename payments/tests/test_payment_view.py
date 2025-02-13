@@ -14,11 +14,11 @@ def test_payout_list():
     client = APIClient()
     # Registra um usuário de teste
     user = User.objects.create_user(username="testuser", password="testpass")
-    # Obtém a url
+    
     url = reverse('payments_get')
-    # Faz o login 
+    
     client.login(username="testuser", password="testpass")
-    # Faz a requisição get
+    
     response = client.get(url)
     
     # Verifica se o status retornado foi 200 OK
@@ -27,13 +27,13 @@ def test_payout_list():
 # Testa o método post para criar um pagamento
 @pytest.mark.django_db
 def test_create_payment():
-    # Simula um cliente HTTP
+    
     client = APIClient()
-    # Registra um usuário de teste
+    
     user = User.objects.create_user(username="testuser", password="testpass")
-    # Gera a url
+    
     url = reverse("payment_create")
-    # Faz o login 
+    
     client.login(username="testuser", password="testpass")
     
     # Cria um inquilino
@@ -56,11 +56,11 @@ def test_create_payment():
     
 @pytest.mark.django_db
 def test_report_payments():
-    # Simula um cliente HTTP
+    
     client = APIClient()
-    # Cria um usuário de teste
+    
     user = User.objects.create_user(username="testuser", password="testpass")
-    # Faz o login
+    
     client.login(username="testuser", password="testpass")
     # Cria um inquilino
     tenant = Tenants.objects.create(
@@ -86,9 +86,9 @@ def test_report_payments():
         due_date=now().date() - timedelta(days=2),
         status="atrasado"
     )
-    # Obtém a url
+    
     url = reverse("payouts_report_get")
-    # Faz a requisição get
+    
     response = client.get(url)
     
     # Verifica se as informações estão corretas
