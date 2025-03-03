@@ -7,6 +7,13 @@ from payments.models import Payments
 from django.utils.timezone import now
 from datetime import timedelta
 
+def create_tenant():
+    return Tenants.objects.create(
+        name="João da Silva",
+        email="joao@email.com",
+        contact="999999999"
+    )
+
 @pytest.mark.django_db
 def test_payout_list():
     client = APIClient()
@@ -26,12 +33,7 @@ def test_create_payment():
     url = reverse("payment_create")
     
     client.login(username="testuser", password="testpass")
-    
-    tenant = Tenants.objects.create(
-        name="João da Silva",
-        email="joao@email.com",
-        contact="999999999"
-    )
+    tenant = create_tenant()
     
     response = client.post(url, {
         "value": 1000.00,
@@ -49,12 +51,7 @@ def test_report_payments():
     user = User.objects.create_user(username="testuser", password="testpass")
     client.login(username="testuser", password="testpass")
     
-    # Cria um inquilino
-    tenant = Tenants.objects.create(
-        name="João da Silva",
-        email="joao@email.com",
-        contact="999999999"
-    )
+    tenant = create_tenant()
     # Cria 3 pagamentos
     Payments.objects.create(
         value=1000,
