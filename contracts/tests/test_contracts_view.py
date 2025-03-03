@@ -8,26 +8,19 @@ from contracts.models import Contracts
 
 @pytest.mark.django_db
 def test_contracts_list():
-    # Simula um cliente HTTP
     client = APIClient()
-    # Cria um usuário de teste
     user = User.objects.create_user(username="testuser", password="testpass")
-    
     url = reverse('contracts_get')
-    
     client.login(username="testuser", password="testpass")
-    
+
     response = client.get(url)
     
     assert response.status_code == 200
 
 @pytest.mark.django_db
 def test_create_contract():
-    
     client = APIClient()
-    
     user = User.objects.create_user(username="testuser", password="testpass")
-    
     url = reverse('contract_create')
     
     client.login(username="testuser", password="testpass")
@@ -44,7 +37,7 @@ def test_create_contract():
         rent=1000.00,
         status="disponível"
     )
-    # Faz a requisição post
+
     response = client.post(url, {
         "start_date": "2025-03-10",
         "end_date": "2026-01-10",
@@ -53,14 +46,11 @@ def test_create_contract():
         "properties": estate.id
     })
     
-    # Verifica se o status retornado foi 201 created
     assert response.status_code == 201
     
 @pytest.mark.django_db
 def test_property_tenant_contract():
-     
     client = APIClient()
-    
     user = User.objects.create_user(username="testuser", password="testpass")
     
     tenant = Tenants.objects.create(
@@ -85,9 +75,7 @@ def test_property_tenant_contract():
     )
     
     url = reverse('properties_tenants_contracts_get', args=[estate.id, tenant.id])
-    
     client.login(username="testuser", password="testpass")
-    
     response = client.get(url)
 
     # Verifica se o contrato obtido possui as informações corretas

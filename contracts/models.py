@@ -11,3 +11,4 @@ class Contracts(models.Model):
     tenants = models.ForeignKey(Tenants, on_delete=models.RESTRICT, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     date_update = models.DateTimeField(auto_now=True)
+    

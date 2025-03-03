@@ -7,43 +7,32 @@ from payments.models import Payments
 from django.utils.timezone import now
 from datetime import timedelta
 
-# Testa o método get para obter todos os pagamentos
 @pytest.mark.django_db
 def test_payout_list():
-    # Simula um cliente HTTP
     client = APIClient()
-    # Registra um usuário de teste
     user = User.objects.create_user(username="testuser", password="testpass")
-    
     url = reverse('payments_get')
-    
     client.login(username="testuser", password="testpass")
     
     response = client.get(url)
     
-    # Verifica se o status retornado foi 200 OK
     assert response.status_code == 200 
     
-# Testa o método post para criar um pagamento
+    
 @pytest.mark.django_db
 def test_create_payment():
-    
     client = APIClient()
-    
     user = User.objects.create_user(username="testuser", password="testpass")
-    
     url = reverse("payment_create")
     
     client.login(username="testuser", password="testpass")
     
-    # Cria um inquilino
     tenant = Tenants.objects.create(
         name="João da Silva",
         email="joao@email.com",
         contact="999999999"
     )
     
-    # Faz a requisição post para criar um pagamento
     response = client.post(url, {
         "value": 1000.00,
         "tenant": tenant.id,
@@ -51,17 +40,15 @@ def test_create_payment():
         },
         format='json')
     
-    # Verifica se o status retornado foi 201 Created
     assert response.status_code == 201
+    
     
 @pytest.mark.django_db
 def test_report_payments():
-    
     client = APIClient()
-    
     user = User.objects.create_user(username="testuser", password="testpass")
-    
     client.login(username="testuser", password="testpass")
+    
     # Cria um inquilino
     tenant = Tenants.objects.create(
         name="João da Silva",
