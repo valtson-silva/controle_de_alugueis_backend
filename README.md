@@ -13,6 +13,7 @@ Este é um backend para gerenciar aluguéis de propriedades desenvolvido usando 
 - Relatórios de aluguéis pagos/pendentes
 - Envio automático de e-mails para lembrar inquilinos sobre vencimentos
 - Testes automatizados com Pytest
+- Docker para Implantação
 <br/>
 
 ## 📡 Tecnologias utilizadas 
