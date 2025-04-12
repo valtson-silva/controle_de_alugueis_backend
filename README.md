@@ -35,14 +35,19 @@ Para instalar o Python, acesse: https://www.python.org/downloads/
 
 Para instalar o Postgresql, acesse: https://www.postgresql.org/download/
 
-Execute esse comando no terminal para instalar o Django e todas as bibliotecas, que estão no projeto:
-```
-pip install -r requirements.txt
-```
+Para instalar o Docker, acesse: https://www.docker.com/
 
-Execute esse comando no terminal para rodar o pytest:
+Execute esses comandos no terminal para usar o docker e rodar o projeto:
 ```
-pytest
+# 1. Construir a imagem do Docker
+docker-compose build
+
+# 2. Subir os containers
+docker-compose up -d
+```
+Execute esse comando no terminal para executar os testes:
+```
+docker-compose run --rm web pytest
 ```
 
 <br/>
