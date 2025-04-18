@@ -2,7 +2,7 @@
 
 ## 📖  Descrição
 
-Este é um backend para gerenciar aluguéis de propriedades desenvolvido usando Django e Django REST Framework. O sistema permite o cadastro e gerenciamento de inquilinos, imóveis, contratos e pagamentos, além de funcionalidades avançadas como relatórios financeiros e envio de e-mails automáticos aos inquilinos sobre as datas de vencimento dos aluguéis.
+Este é um backend para gerenciar aluguéis de propriedades desenvolvido usando Django e Django REST Framework. O sistema permite o cadastro e gerenciamento de inquilinos, imóveis, contratos e pagamentos, além de funcionalidades avançadas como relatórios financeiros e envio de e-mails contendo o relatório dos pagamentos em formato PDF.
 
 <br/>
 
@@ -11,7 +11,7 @@ Este é um backend para gerenciar aluguéis de propriedades desenvolvido usando 
 - CRUD de propriedades, inquilinos, contratos e pagamentos
 - Autenticação de usuários (registro, login e logout)
 - Relatórios de aluguéis pagos/pendentes
-- Envio automático de e-mails para lembrar inquilinos sobre vencimentos
+- Envio de e-mails contendo o relatório dos pagamentos em formato PDF
 - Testes automatizados com Pytest
 - Docker para Implantação
 <br/>
@@ -23,7 +23,8 @@ Este é um backend para gerenciar aluguéis de propriedades desenvolvido usando 
 <img align="left" alt="Postgresql" height="30" width="30" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg">
 <img align="left" alt="docker" height="32" width="35" src="https://github.com/user-attachments/assets/6198150a-b145-449c-ad48-cc12f138bd95">
 <img align="left" alt="celery" height="32" width="35" src="https://docs.celeryq.dev/en/stable/_static/celery_512.png">
-<img align="left" alt="redis" height="38" width="47" src="https://github.com/user-attachments/assets/0f604e51-e697-4358-b3b5-7f002b52ec58">
+<img align="left" alt="rabbitMQ" height="33" width="47" src="https://img.shields.io/badge/-FF6600?logo=rabbitmq&color=%23000000">
+  <img align="left" alt="pandas" height="33" width="47" src="https://img.shields.io/badge/-150458?logo=pandas&color=%23000000">
 </div>
 <br/><br/>
 
