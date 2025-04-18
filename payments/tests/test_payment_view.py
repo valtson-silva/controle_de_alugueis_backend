@@ -79,3 +79,4 @@ def test_report_payments():
     assert response.data["pagos"][0]["status"] == "pago"
     assert response.data["pendentes"][0]["status"] == 'pendente'
     assert response.data["atrasados"][0]["status"] == "atrasado"
+    

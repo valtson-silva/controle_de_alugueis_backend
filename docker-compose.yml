@@ -7,10 +7,10 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
-      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
     depends_on:
       - db
-      - redis
+      - rabbitmq
     ports:
       - "8000:8000"
     networks:
@@ -33,13 +33,17 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  redis:
-    image: redis:alpine
-    restart: always
-    networks:
-      - default
+  rabbitmq:
+    image: rabbitmq:4-management
+    container_name: rabbitmq
     ports:
-      - "6379:6379"
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+    - default
 
   celery_worker:
     build: .
@@ -47,6 +51,7 @@ services:
     depends_on: 
       - db
       - web
+      - rabbitmq
     env_file:
       - .env
     command: ["celery", "-A", "rental_system", "worker", "--loglevel=info"]
@@ -56,7 +61,7 @@ services:
     restart: always
     depends_on:
       - web
-      - redis
+      - rabbitmq
     env_file:
       - .env
     command: ["celery", "-A", "rental_system", "beat", "--loglevel=info"]
@@ -65,7 +70,7 @@ services:
     build: .
     depends_on:
       - db
-      - redis
+      - rabbitmq
     env_file:
       - .env
     command: ["pytest", "--disable-warnings", "--cov=app"]

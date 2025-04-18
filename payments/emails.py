@@ -1,31 +1,39 @@
-from django.core.mail import send_mail
-from django.utils.timezone import now
-from datetime import timedelta
+from django.core.mail import EmailMessage
+import pandas as pd
+from celery import shared_task
+from django.core.files.base import ContentFile
+from io import BytesIO
+from django.template.loader import render_to_string
+from xhtml2pdf import pisa
 from .models import Payments
-from django.db.models import Q
 from decouple import config
 
-def send_email_reminder():
-    # Envia emails para os inquilinos sobre pagamentos próximos
+@shared_task
+def send_report_by_email():
+    # Gera o relatório PDF e o envia por email 
     
-    limit_date = now().date() + timedelta(days=3)
-    
-    # Obtém os pagamentos pendentes
-    pending_payments = Payments.objects.filter(
-        Q(status="pendente") & Q(due_date__lte=limit_date)
+    payments = Payments.objects.all().values(
+        "value", "due_date", "tenant__name", "status"
     )
+    df = pd.DataFrame(payments)
     
-    # Itera sobre os pagamentos pendentes
-    for payment in pending_payments:
-        tenant_email = payment.tenant.email
-        message = f"Olá, {payment.tenant.name},\nSeu aluguel vence em {payment.due_date},\nPor favor realize o pagamento o mais rápido possível. Obrigado."
-        
-        # Envia o email
-        send_mail(
-            "Lembrete de Vencimento do Aluguel",
-            message,
-            config('EMAIL_HOST_USER'),
-            [tenant_email],
-            fail_silently=False
-        )
+    html_string = render_to_string("report.html", {"df": df.to_html(classes="table table-striped", index=False)})
+    
+    result= BytesIO()
+    pisa_status = pisa.CreatePDF(html_string, dest=result)
+    
+    if pisa_status.err:
+        return "Erro na geração do PDF"
+    
+
+    email = EmailMessage(
+        subject="Relatório de Pagamentos",
+        body="Segue em anexo o relatório solicitado.",
+        from_email=config("EMAIL_HOST_USER"),
+        to=[config("EMAIL_HOST_USER")]
+    )
+    email.attach("relatorio.pdf", result.getvalue(), "application/pdf")
+    email.send()
+    
+    return "Relatório enviado com sucesso!"
     

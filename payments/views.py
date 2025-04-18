@@ -6,6 +6,8 @@ from .models import Payments
 from .serializers import PaymentsSerializer
 from django.db.models import Q
 from django.utils.timezone import now
+from .emails import send_report_by_email
+from tenants.models import Tenants
 
 class PaymentsCreateView(APIView):
     # Registra os pagamentos no banco de dados
@@ -112,3 +114,12 @@ class PayoutsReportView(APIView):
             "atrasados": PaymentsSerializer(arrears, many=True).data
         }, status=status.HTTP_200_OK)
     
+class CreateReportSendEmailView(APIView):
+    # Gera um relatório PDF dos pagamentos dos inquilinos e os envia por email
+    
+    permission_classes = [IsAuthenticated]
+    
+    def post(self, request):
+        send_report_by_email.delay()
+        return Response({"message": "Relatório está sendo processado e enviado para o seu email!"}, status=status.HTTP_200_OK)
+        
